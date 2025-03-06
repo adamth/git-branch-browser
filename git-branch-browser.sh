@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # git-branch-browser - Interactive Git branch switcher
-# https://github.com/threedivers/git-branch-browser
+# https://github.com/adamth/git-branch-browser
 
 # Colors for output
 RED='\033[0;31m'
