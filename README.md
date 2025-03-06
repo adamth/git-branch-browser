@@ -18,7 +18,7 @@ Interactive Git branch switcher with fuzzy search and arrow key navigation.
 
 ```bash
 # Clone the repository
-git clone https://github.com/threedivers/git-branch-browser.git
+git clone https://github.com/adamth/git-branch-browser.git
 cd git-branch-browser
 
 # Run the installer
