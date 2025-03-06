@@ -1,0 +1,6 @@
+name: Git Branch Browser
+version: 1.0.0
+description: Interactive Git branch switcher with fuzzy search and arrow key navigation
+author: ThreeDivers
+dependencies: git,fzf
+category: git
