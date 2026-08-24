@@ -11,7 +11,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Get the install directory from the first argument or use default
-INSTALL_DIR="${1:-/usr/local/bin}"
+INSTALL_DIR="${1:-$HOME/.local/bin}"
 CONFIG_DIR="${2:-$HOME/.config/git-branch-browser}"
 
 # Ensure config directory exists
@@ -26,10 +26,25 @@ if [ ! -f "$SCRIPT_PATH" ]; then
     exit 1
 fi
 
-cp "$SCRIPT_PATH" "$DEST_PATH"
+mkdir -p "$INSTALL_DIR"
+
+if ! cp "$SCRIPT_PATH" "$DEST_PATH" 2>/dev/null; then
+    echo -e "${RED}Error: could not write to $INSTALL_DIR.${NC}"
+    echo -e "Retry with a writable directory, e.g. ${BLUE}./install.sh \"$HOME/.local/bin\"${NC}"
+    echo -e "or with elevated permissions: ${BLUE}sudo ./install.sh \"$INSTALL_DIR\"${NC}"
+    exit 1
+fi
 chmod +x "$DEST_PATH"
 
 echo -e "${GREEN}✅ Installed to $DEST_PATH${NC}"
+
+case ":$PATH:" in
+    *":$INSTALL_DIR:"*) ;;
+    *)
+        echo -e "${YELLOW}⚠️ $INSTALL_DIR is not on your PATH, so the command will not be found.${NC}"
+        echo -e "Add this to your shell configuration: ${BLUE}export PATH=\"$INSTALL_DIR:\$PATH\"${NC}"
+        ;;
+esac
 
 # Check for dependencies
 echo -e "\n${BLUE}Checking dependencies...${NC}"
